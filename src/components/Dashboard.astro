@@ -1,8 +1,23 @@
 ---
 
+const { blocks = [], imageSrc="" } = Astro.props;
+
+const processedblocks = blocks.map((block, index) => ({
+  growth: 0, // Set the default value
+  ...block,
+  value: block.value ? block.value.toLocaleString(): "",
+  growth: block.growth ? "" + block.growth : "0",
+  link : block.link ? "window.open(\'" + block.link + "\')" : ""
+  }));
+
+const headTitleItem = processedblocks[0];
+const middleIndex = Math.ceil((processedblocks.length  / 2) + 1);
+const leftColumnItems = processedblocks.slice(1, middleIndex);
+const rightColumnItems = processedblocks.slice(middleIndex);
 ---
 
 <style>
+
     .diaspora-dashboard{
         font-family: 'Courier New', monospace;
         background-color: white;
@@ -29,7 +44,7 @@
 
     }
     .diaspora-dashboard-block{
-        margin: 1rem;
+        margin: 0.5rem;
 }
     .diaspora-dashboard-block h4{
         font-size: 1rem;
@@ -53,14 +68,38 @@
 
     .dd-head * p{
         font-size: 4rem;
-
     }
+    
     .dd-body{
         display:flex;
         flex-direction: row;
         justify-content: space-between;
         margin: 10px;
     }
+    /* Tooltip container */
+
+
+/* Tooltip text */
+.diaspora-dashboard-block .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  text-align: center;
+  padding: 10px 5px;
+  border-radius: 1px;
+  border: 1px solid green;
+ 
+  /* Position the tooltip text */
+  position: relative;
+  z-index: 1;
+  left: 10%;
+  bottom:5px;
+  
+}
+
+.diaspora-dashboard-block:hover .tooltiptext {
+  visibility: visible;
+}
     .dd-column{
         display: flex;
         flex-direction: column;
@@ -75,68 +114,95 @@
         color:#02FD08;
     }
 
+@media only screen and (max-width: 600px) {
+      .diaspora-dashboard{
+        max-width: 100vw;
+        padding:0px;
+        margin:0px;
+
+    }
+    .diaspora-dashboard * p{
+        font-size: 5vw;
+    }
+    .diaspora-dashboard-title{
+        font-size: 3vw;
+    }
+    .diaspora-dashboard * h4{
+        font-size: 3vw;
+    }
+    .dd-head * p{
+        font-size: 7vw;
+    }
+    .tooltip{
+        display:none;
+    }
+    .tooltiptext{
+        display:none;
+    }
+}
 
 </style>
 <div class="text-dark-irish-green" style="width: 100%; display: flex; flex-direction:row; justify-content: center;"> 
 <div class="diaspora-dashboard">
+
    
     <div class="diaspora-dashboard-title">
         <span>&eacute;/acc</span>
         <span>THE TRUE IRISH ECONOMY</span>            
     </div>
     <div class="dd-head">
-        <div class="diaspora-dashboard-block">
-            <a href="">
-            <h4>TOTAL WEALTH</h4><!-- OWN EVERYTHING FROM THE PLOUGH TO THE STARS -CONNOLLY-->
-            <p class="ticking-number" growth="17">10,000,000,000,000</p> 
-            </a>
+        <div class="diaspora-dashboard-block" onclick={headTitleItem.link}>
+            { headTitleItem.tooltiptext &&
+                <span class="tooltiptext">{headTitleItem.tooltiptext}</span>
+            }
+            <h4>{headTitleItem.blockTitle}</h4><!-- OWN EVERYTHING FROM THE PLOUGH TO THE STARS -CONNOLLY-->
+            <p class="ticking-number" growth={headTitleItem.growth}>{headTitleItem.value}</p> 
         </div>
     </div>
     <div class="dd-body">
     <div class="dd-column">
 
-    <div class="diaspora-dashboard-block">
-        <a href="">
-        <h4>NET ASSETS PER CAPITA</h4>
-        <p class="ticking-number" growth="7">354,000 </p> 
-    </a>
-    </div>
+ 
 
-    <div class="diaspora-dashboard-block">
-        <a href="">
-        <h4>MEDIAN HOUSEHOLD INCOME</h4>
-        <p>52,440</p>
-    </a>
+  {leftColumnItems.map((block, index) => (
+
+    <div class="diaspora-dashboard-block" onclick={block.link}>
+    {block.tooltiptext &&
+        <span class="tooltiptext">{block.tooltiptext}</span>
+    }
+        <a target="_blank" href={block.link}>
+        <h4>{block.blockTitle}</h4>
+    
+        <p class="ticking-number" growth={block.growth}>{block.value}</p> 
+        </a>
     </div>
-    <div class="diaspora-dashboard-block">
-        <a href="">
-        <h4>WEALTH BY ETHNICITY RANK</h4>
-        <p class="green-text">4th</p>
-    </a>
-    </div>
+  ))}
+    
+   
 
 </div>
     <div class="dd-column right-column">
+      {rightColumnItems.map((block, index) => (
 
-    <div class="diaspora-dashboard-block">
-        <a target="_blank" href="https://en.wikipedia.org/wiki/Irish_diaspora#List_of_countries_by_population_of_Irish_heritage">
-            <h4>TOTAL POPULATION</h4>
-            <p class="ticking-number" growth="9">65,548,211</p>
+    <div class="diaspora-dashboard-block" onclick={block.link}>
+    {block.tooltiptext &&
+        <span class="tooltiptext">{block.tooltiptext}</span>
+    }
+        <a target="_blank" href={block.link}>
+        <h4>{block.blockTitle}</h4>
+    
+        <p class="ticking-number" growth={block.growth}>{block.value}</p> 
         </a>
     </div>
-            <div class="diaspora-dashboard-block">
-        
+  ))}
+
+{imageSrc &&
+    <div class="diaspora-dashboard-block">
         <div class="dd-block-img">
-            <img height="220px" src="./Map_of_the_Irish_Diaspora_in_the_World.svg-removebg-preview.png"/>
+            <img height="220px" src={imageSrc}/>
         </div>
     </div>
-    <div class="diaspora-dashboard-block">
-        <a target="_blank" href="">
-        <h4>HEADS OF STATE</h4>
-            <p >4</p>
-        </a>
-    </div>
-
+}
     
 
 </div>
@@ -161,9 +227,12 @@
             var tickingNumIndex = 0;
             function tick(el){    
                 let n = str2number(el.innerText);
+                
                 growthRate = str2number(el.getAttribute("growth"));
-                n += Math.round(Math.random() * growthRate * 2);
-                el.innerText =  n.toLocaleString();
+                if (growthRate){
+                    n += Math.round(Math.random() * growthRate * 2);
+                    el.innerText =  n.toLocaleString();
+                }
             }
 
             function tickNextElement(){
