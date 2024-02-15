@@ -1,6 +1,6 @@
 ---
 
-const { blocks = [], imageSrc="" } = Astro.props;
+const { blocks = [], dashboardTitle="", imageSrc="" } = Astro.props;
 
 const processedblocks = blocks.map((block:any, index:any) => ({
   ...block,
@@ -10,31 +10,31 @@ const processedblocks = blocks.map((block:any, index:any) => ({
   }));
 
 const headTitleItem = processedblocks[0];
-const middleIndex = Math.ceil((processedblocks.length  / 2) + 1);
+const middleIndex = Math.ceil(((processedblocks.length -1) / 2)+ 1);
 const leftColumnItems = processedblocks.slice(1, middleIndex);
 const rightColumnItems = processedblocks.slice(middleIndex);
 ---
 
 <style>
 
-    .diaspora-dashboard{
-        font-family: 'Courier New', monospace;
+    .dashboard{
+        font-family: 'Times New Roman', monospace;
         background-color: white;
         max-width: 1000px;
         padding: 5px 30px;
     }
-    .diaspora-dashboard * a {
+    .dashboard * a {
         color: inherit;
         text-decoration: none;
     }
 
-    .diaspora-dashboard * a:hover {
+    .dashboard * a:hover {
         color:inherit; 
         text-decoration:none; 
         cursor:pointer;  
     }
-            
-    .diaspora-dashboard-title{
+           
+    .dashboard-title{
         margin: 10px;
         padding: 10px;
         display: flex;
@@ -42,17 +42,17 @@ const rightColumnItems = processedblocks.slice(middleIndex);
         justify-content: space-between;
 
     }
-    .diaspora-dashboard-block{
+    .dashboard-block{
         margin: 0.5rem;
 }
-    .diaspora-dashboard-block h4{
+    .dashboard-block h4{
         font-size: 1rem;
         font-weight: normal; 
         margin: 0px;
         padding: 0px;
         
     } 
-    .diaspora-dashboard-block p{
+    .dashboard-block p{
         font-size: 2.5rem;
         font-weight: bold ; 
 
@@ -61,7 +61,10 @@ const rightColumnItems = processedblocks.slice(middleIndex);
         
     }   
     .dd-head{
-        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
 
     }
 
@@ -79,7 +82,7 @@ const rightColumnItems = processedblocks.slice(middleIndex);
 
 
 /* Tooltip text */
-.diaspora-dashboard-block .tooltiptext {
+.dashboard-block .tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: white;
@@ -96,8 +99,17 @@ const rightColumnItems = processedblocks.slice(middleIndex);
   
 }
 
-.diaspora-dashboard-block:hover .tooltiptext {
+.dashboard-block:hover {
+  cursor: pointer;
+}
+
+.dashboard-block:hover .tooltiptext {
   visibility: visible;
+}
+
+.dashboard-block:hover p {
+    text-decoration: underline dotted ;
+    text-decoration-color: currentcolor;
 }
     .dd-column{
         display: flex;
@@ -114,19 +126,19 @@ const rightColumnItems = processedblocks.slice(middleIndex);
     }
 
 @media only screen and (max-width: 600px) {
-      .diaspora-dashboard{
+      .dashboard{
         max-width: 100vw;
         padding:0px;
         margin:0px;
 
     }
-    .diaspora-dashboard * p{
+    .dashboard * p{
         font-size: 5vw;
     }
-    .diaspora-dashboard-title{
+    .dashboard-title{
         font-size: 3vw;
     }
-    .diaspora-dashboard * h4{
+    .dashboard * h4{
         font-size: 3vw;
     }
     .dd-head * p{
@@ -142,15 +154,15 @@ const rightColumnItems = processedblocks.slice(middleIndex);
 
 </style>
 <div class="text-dark-irish-green" style="width: 100%; display: flex; flex-direction:row; justify-content: center;"> 
-<div class="diaspora-dashboard">
+<div class="dashboard">
 
    
-    <div class="diaspora-dashboard-title">
+    <div class="dashboard-title">
         <span>&eacute;/acc</span>
-        <span>THE TRUE IRISH ECONOMY</span>            
+        <span>{dashboardTitle}</span>            
     </div>
     <div class="dd-head">
-        <div class="diaspora-dashboard-block" onclick={headTitleItem.link}>
+        <div class="dashboard-block" onclick={headTitleItem.link}>
             { headTitleItem.tooltiptext &&
                 <span class="tooltiptext">{headTitleItem.tooltiptext}</span>
             }
@@ -160,20 +172,14 @@ const rightColumnItems = processedblocks.slice(middleIndex);
     </div>
     <div class="dd-body">
     <div class="dd-column">
-
- 
-
   {leftColumnItems.map((block:any, index:any) => (
 
-    <div class="diaspora-dashboard-block" onclick={block.link}>
+    <div class="dashboard-block" onclick={block.link}>
     {block.tooltiptext &&
         <span class="tooltiptext">{block.tooltiptext}</span>
     }
-        <a target="_blank" href={block.link}>
         <h4>{block.blockTitle}</h4>
-    
         <p class="ticking-number" growth={block.growth}>{block.value}</p> 
-        </a>
     </div>
   ))}
     
@@ -183,26 +189,23 @@ const rightColumnItems = processedblocks.slice(middleIndex);
     <div class="dd-column right-column">
       {rightColumnItems.map((block:any, index:any) => (
 
-    <div class="diaspora-dashboard-block" onclick={block.link}>
+    <div class="dashboard-block" onclick={block.link}>
         {block.tooltiptext &&
             <span class="tooltiptext">{block.tooltiptext}</span>
         }
-        <a target="_blank" href={block.link}>
         <h4>{block.blockTitle}</h4>
         <p class="ticking-number" growth={block.growth}>{block.value}</p> 
-        </a>
     </div>
     ))}
 
     {imageSrc &&
-        <div class="diaspora-dashboard-block">
+        <div class="dashboard-block">
             <div class="dd-block-img">
                 <img height="220px" src={imageSrc}/>
             </div>
         </div>
     }
     
-
 </div>
 </div>
     

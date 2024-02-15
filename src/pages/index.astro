@@ -1,14 +1,17 @@
 
 ---
 import Dashboard from '../components/Dashboard.astro';
-const dashboardItems = [
-  { blockTitle:"TOTAL WEALTH", growth: 17, value: '10,000,000,000,000', link:"www.google.com" },
-  { blockTitle:"NET ASSETS PER CAPITA", growth: 7, value: '354,000', link:"www.google.com" },
-  { blockTitle:"MEDIAN HOUSEHOLD INCOME", growth: 0, value: '52,440', link:"https://www.google.com" },
-  { blockTitle:"WEALTH BY ETHNICITY RANK", growth: 0, value: '4th', link:"www.google.com" }, 
-  { blockTitle:"TOTAL POPULATION", growth: 0, value: '65,548,211', link:"https://en.wikipedia.org/wiki/Irish_diaspora#List_of_countries_by_population_of_Irish_heritage"}, 
-  { blockTitle:"HEADS OF STATE", growth: 0, value: '4', link:"" }, 
+
+const housingMetrics = [
+{ blockTitle:"TOTAL HOUSING STOCK IN IRELAND", growth: 1, value: '2,003,645', link:"https://www.cso.ie/en/releasesandpublications/ep/p-cp1hii/cp1hii/hs/" },
+{ blockTitle:"HOUSES BUILT IN 12 MONTHS", growth: 1, value: '32,110', link:"https://www.cso.ie/en/releasesandpublications/ep/p-ndc/newdwellingcompletionsq42022/" },
+{ blockTitle:"AVERAGE RENT IN DUBLIN", growth: 3, value: '2,113', link:"https://www.rtb.ie/images/uploads/forms/RTB_Rent_Index_Q3_2023_infographic_no._2_.pdf" },
+  { blockTitle:"MEDIAN HOUSEHOLD INCOME €", growth: 0, value: '45,537', link:"" },
+  { blockTitle:"HOUSE PRICE GROWTH LAST YEAR", growth: 0, value: '2.3%', link:"https://www.euronews.com/business/2023/12/13/house-prices-continue-to-rise-in-ireland-wheres-best-to-buy#:~:text=Figures%20released%20by%20the%20country%27s,September%20and%201.1%25%20in%20August." }, 
+  { blockTitle:"TAOISEACH DECLARED HOUSING EMERGENCY", growth: 0, value: '29th March 2018', link:"https://www.thejournal.ie/taoiseach-homelessness-3930398-Mar2018/"}, 
+  { blockTitle:"NEW BUILDS BER RATING A OR ABOVE", growth: 0, value: '>99%', link:"https://www.irishtimes.com/business/2023/07/17/dublin-18-has-highest-proportion-of-a-rated-homes-in-country/" }, 
 ];
+
 ---
 
 <html lang="en" class="h-full">
@@ -71,9 +74,8 @@ const dashboardItems = [
 
 	<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
 	
-	<Dashboard blocks={dashboardItems} imageSrc="Map_of_the_Irish_Diaspora_in_the_World.svg-removebg-preview.png"/>
-
-	<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
+	<Dashboard blocks={housingMetrics}  dashboardTitle="HOUSING BY THE NUMBERS"/>
+	<hr class="border-t border-dark-irish-green"/> <!-- Divider -->
 	
 	<footer class="p-4">
 		<p class="text-center text-lg font-serif text-dark-irish-green">© 2024 Éire Accelerationism</p>
