@@ -2,12 +2,12 @@
 ---
 import Dashboard from '../components/Dashboard.astro';
 const dashboardItems = [
-  { blockTitle:"TOTAL WEALTH", growth: 17, value: '10,000,000,000,000', link:"www.google.com", tooltiptext:"hello, world" },
-  { blockTitle:"NET ASSETS PER CAPITA", growth: 7, value: '354,000', link:"www.google.com", tooltiptext:"hello, world" },
-  { blockTitle:"MEDIAN HOUSEHOLD INCOME", growth: 0, value: '52,440', link:"https://www.google.com", tooltiptext:"hello, world" },
-  { blockTitle:"WEALTH BY ETHNICITY RANK", growth: 0, value: '4th', link:"www.google.com", tooltiptext:"hello, world" }, 
-  { blockTitle:"TOTAL POPULATION", growth: 0, value: '65,548,211', link:"https://en.wikipedia.org/wiki/Irish_diaspora#List_of_countries_by_population_of_Irish_heritage", tooltiptext:"hello, world" }, 
-  { blockTitle:"HEADS OF STATE", growth: 0, value: '4', link:"", tooltiptext:"hello, world" }, 
+  { blockTitle:"TOTAL WEALTH", growth: 17, value: '10,000,000,000,000', link:"www.google.com" },
+  { blockTitle:"NET ASSETS PER CAPITA", growth: 7, value: '354,000', link:"www.google.com" },
+  { blockTitle:"MEDIAN HOUSEHOLD INCOME", growth: 0, value: '52,440', link:"https://www.google.com" },
+  { blockTitle:"WEALTH BY ETHNICITY RANK", growth: 0, value: '4th', link:"www.google.com" }, 
+  { blockTitle:"TOTAL POPULATION", growth: 0, value: '65,548,211', link:"https://en.wikipedia.org/wiki/Irish_diaspora#List_of_countries_by_population_of_Irish_heritage"}, 
+  { blockTitle:"HEADS OF STATE", growth: 0, value: '4', link:"" }, 
 ];
 ---
 
@@ -71,7 +71,7 @@ const dashboardItems = [
 
 	<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
 	
-	<Dashboard blocks={dashboardItems} imageSrc="./Map_of_the_Irish_Diaspora_in_the_World.svg-removebg-preview.png"/>
+	<Dashboard blocks={dashboardItems} imageSrc="Map_of_the_Irish_Diaspora_in_the_World.svg-removebg-preview.png"/>
 
 	<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
 	

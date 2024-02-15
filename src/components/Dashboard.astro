@@ -2,8 +2,7 @@
 
 const { blocks = [], imageSrc="" } = Astro.props;
 
-const processedblocks = blocks.map((block, index) => ({
-  growth: 0, // Set the default value
+const processedblocks = blocks.map((block:any, index:any) => ({
   ...block,
   value: block.value ? block.value.toLocaleString(): "",
   growth: block.growth ? "" + block.growth : "0",
@@ -164,7 +163,7 @@ const rightColumnItems = processedblocks.slice(middleIndex);
 
  
 
-  {leftColumnItems.map((block, index) => (
+  {leftColumnItems.map((block:any, index:any) => (
 
     <div class="diaspora-dashboard-block" onclick={block.link}>
     {block.tooltiptext &&
@@ -182,27 +181,26 @@ const rightColumnItems = processedblocks.slice(middleIndex);
 
 </div>
     <div class="dd-column right-column">
-      {rightColumnItems.map((block, index) => (
+      {rightColumnItems.map((block:any, index:any) => (
 
     <div class="diaspora-dashboard-block" onclick={block.link}>
-    {block.tooltiptext &&
-        <span class="tooltiptext">{block.tooltiptext}</span>
-    }
+        {block.tooltiptext &&
+            <span class="tooltiptext">{block.tooltiptext}</span>
+        }
         <a target="_blank" href={block.link}>
         <h4>{block.blockTitle}</h4>
-    
         <p class="ticking-number" growth={block.growth}>{block.value}</p> 
         </a>
     </div>
-  ))}
+    ))}
 
-{imageSrc &&
-    <div class="diaspora-dashboard-block">
-        <div class="dd-block-img">
-            <img height="220px" src={imageSrc}/>
+    {imageSrc &&
+        <div class="diaspora-dashboard-block">
+            <div class="dd-block-img">
+                <img height="220px" src={imageSrc}/>
+            </div>
         </div>
-    </div>
-}
+    }
     
 
 </div>
@@ -223,20 +221,25 @@ const rightColumnItems = processedblocks.slice(middleIndex);
                 setInterval(tickNextElement, Math.random()*2000);
                 }
 
+            function randomDistribution(variance){
+                variance = (variance < 1) ? variance : 0.1;
+                return (Math.random() - variance) * (2/(0.5 - variance))
+            }
+
             var tickingNumbers = document.getElementsByClassName("ticking-number");
             var tickingNumIndex = 0;
             function tick(el){    
                 let n = str2number(el.innerText);
-                
                 growthRate = str2number(el.getAttribute("growth"));
                 if (growthRate){
-                    n += Math.round(Math.random() * growthRate * 2);
+                    n += Math.round(growthRate * randomDistribution(0.1) );
                     el.innerText =  n.toLocaleString();
                 }
             }
 
             function tickNextElement(){
-                tick(tickingNumbers[tickingNumIndex % tickingNumbers.length]);
+                let numTicking = tickingNumbers.length;
+                tick(tickingNumbers[tickingNumIndex % numTicking]);
                 tickingNumIndex++;
             }
 
