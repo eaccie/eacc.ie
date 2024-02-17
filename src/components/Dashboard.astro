@@ -1,249 +1,242 @@
 ---
+const { blocks = [], dashboardTitle = "", imageSrc = "" } = Astro.props;
 
-const { blocks = [], dashboardTitle="", imageSrc="" } = Astro.props;
-
-const processedblocks = blocks.map((block:any, index:any) => ({
+const processedblocks = blocks.map((block: any, index: any) => ({
   ...block,
-  value: block.value ? block.value.toLocaleString(): "",
+  value: block.value ? block.value.toLocaleString() : "",
   growth: block.growth ? "" + block.growth : "0",
-  link : block.link ? "window.open(\'" + block.link + "\')" : ""
-  }));
+  link: block.link ? "window.open('" + block.link + "')" : "",
+}));
 
 const headTitleItem = processedblocks[0];
-const middleIndex = Math.ceil(((processedblocks.length -1) / 2)+ 1);
+const middleIndex = Math.ceil((processedblocks.length - 1) / 2 + 1);
 const leftColumnItems = processedblocks.slice(1, middleIndex);
 const rightColumnItems = processedblocks.slice(middleIndex);
 ---
 
 <style>
+  .dashboard {
+    font-family: "Times New Roman", monospace;
+    background-color: white;
+    max-width: 1000px;
+    padding: 5px 30px;
+  }
+  .dashboard * a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-    .dashboard{
-        font-family: 'Times New Roman', monospace;
-        background-color: white;
-        max-width: 1000px;
-        padding: 5px 30px;
-    }
-    .dashboard * a {
-        color: inherit;
-        text-decoration: none;
-    }
+  .dashboard * a:hover {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-    .dashboard * a:hover {
-        color:inherit; 
-        text-decoration:none; 
-        cursor:pointer;  
-    }
-           
-    .dashboard-title{
-        margin: 10px;
-        padding: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+  .dashboard-title {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .dashboard-block {
+    margin: 0.5rem;
+  }
+  .dashboard-block h4 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0px;
+    padding: 0px;
+  }
+  .dashboard-block p {
+    font-size: 2.5rem;
+    font-weight: bold;
 
-    }
-    .dashboard-block{
-        margin: 0.5rem;
-}
-    .dashboard-block h4{
-        font-size: 1rem;
-        font-weight: normal; 
-        margin: 0px;
-        padding: 0px;
-        
-    } 
-    .dashboard-block p{
-        font-size: 2.5rem;
-        font-weight: bold ; 
+    margin: 0px;
+    padding: 0px;
+  }
+  .dd-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 
-        margin: 0px;
-        padding: 0px;
-        
-    }   
-    .dd-head{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
+  .dd-head * p {
+    font-size: 4rem;
+  }
 
-    }
+  .dd-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+  }
+  /* Tooltip container */
 
-    .dd-head * p{
-        font-size: 4rem;
-    }
-    
-    .dd-body{
-        display:flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 10px;
-    }
-    /* Tooltip container */
+  /* Tooltip text */
+  .dashboard-block .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 1px;
+    border: 1px solid green;
 
+    /* Position the tooltip text */
+    position: relative;
+    z-index: 1;
+    left: 10%;
+    bottom: 5px;
+  }
 
-/* Tooltip text */
-.dashboard-block .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: white;
-  text-align: center;
-  padding: 10px 5px;
-  border-radius: 1px;
-  border: 1px solid green;
- 
-  /* Position the tooltip text */
-  position: relative;
-  z-index: 1;
-  left: 10%;
-  bottom:5px;
-  
-}
+  .dashboard-block:hover {
+    cursor: pointer;
+  }
 
-.dashboard-block:hover {
-  cursor: pointer;
-}
+  .dashboard-block:hover .tooltiptext {
+    visibility: visible;
+  }
 
-.dashboard-block:hover .tooltiptext {
-  visibility: visible;
-}
-
-.dashboard-block:hover p {
-    text-decoration: underline dotted ;
+  .dashboard-block:hover p {
+    text-decoration: underline dotted;
     text-decoration-color: currentcolor;
-}
-    .dd-column{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 10px 5px;
-    }
-    .right-column{
-        align-items: end;
-        text-align: right;
-    }
-    .green-text{
-        color:#02FD08;
-    }
+  }
+  .dd-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 5px;
+  }
+  .right-column {
+    align-items: end;
+    text-align: right;
+  }
+  .green-text {
+    color: #02fd08;
+  }
 
-@media only screen and (max-width: 600px) {
-      .dashboard{
-        max-width: 100vw;
-        padding:0px;
-        margin:0px;
-
+  @media only screen and (max-width: 600px) {
+    .dashboard {
+      max-width: 100vw;
+      padding: 0px;
+      margin: 0px;
     }
-    .dashboard * p{
-        font-size: 5vw;
+    .dashboard * p {
+      font-size: 5vw;
     }
-    .dashboard-title{
-        font-size: 3vw;
+    .dashboard-title {
+      font-size: 3vw;
     }
-    .dashboard * h4{
-        font-size: 3vw;
+    .dashboard * h4 {
+      font-size: 3vw;
     }
-    .dd-head * p{
-        font-size: 7vw;
+    .dd-head * p {
+      font-size: 7vw;
     }
-    .tooltip{
-        display:none;
+    .tooltip {
+      display: none;
     }
-    .tooltiptext{
-        display:none;
+    .tooltiptext {
+      display: none;
     }
-}
-
+  }
 </style>
-<div class="text-dark-irish-green" style="width: 100%; display: flex; flex-direction:row; justify-content: center;"> 
-<div class="dashboard">
-
-   
+<div
+  class="text-dark-irish-green"
+  style="width: 100%; display: flex; flex-direction:row; justify-content: center;"
+>
+  <div class="dashboard">
     <div class="dashboard-title">
-        <span>&eacute;/acc</span>
-        <span>{dashboardTitle}</span>            
+      <span>&eacute;/acc</span>
+      <span>{dashboardTitle}</span>
     </div>
     <div class="dd-head">
-        <div class="dashboard-block" onclick={headTitleItem.link}>
-            { headTitleItem.tooltiptext &&
-                <span class="tooltiptext">{headTitleItem.tooltiptext}</span>
-            }
-            <h4>{headTitleItem.blockTitle}</h4><!-- OWN EVERYTHING FROM THE PLOUGH TO THE STARS -CONNOLLY-->
-            <p class="ticking-number" >{headTitleItem.value}</p> 
-        </div>
+      <div class="dashboard-block" onclick={headTitleItem.link}>
+        {
+          headTitleItem.tooltiptext && (
+            <span class="tooltiptext">{headTitleItem.tooltiptext}</span>
+          )
+        }
+        <h4>
+          {headTitleItem.blockTitle}
+        </h4><!-- OWN EVERYTHING FROM THE PLOUGH TO THE STARS -CONNOLLY-->
+        <p class="ticking-number">{headTitleItem.value}</p>
+      </div>
     </div>
     <div class="dd-body">
-    <div class="dd-column">
-  {leftColumnItems.map((block:any, index:any) => (
-
-    <div class="dashboard-block" onclick={block.link}>
-    {block.tooltiptext &&
-        <span class="tooltiptext">{block.tooltiptext}</span>
-    }
-        <h4>{block.blockTitle}</h4>
-        <p class="ticking-number">{block.value}</p> 
-    </div>
-  ))}
-    
-   
-
-</div>
-    <div class="dd-column right-column">
-      {rightColumnItems.map((block:any, index:any) => (
-
-    <div class="dashboard-block" onclick={block.link}>
-        {block.tooltiptext &&
-            <span class="tooltiptext">{block.tooltiptext}</span>
-        }
-        <h4>{block.blockTitle}</h4>
-        <p class="ticking-number">{block.value}</p> 
-    </div>
-    ))}
-
-    {imageSrc &&
-        <div class="dashboard-block">
-            <div class="dd-block-img">
-                <img height="220px" src={imageSrc}/>
+      <div class="dd-column">
+        {
+          leftColumnItems.map((block: any, index: any) => (
+            <div class="dashboard-block" onclick={block.link}>
+              {block.tooltiptext && (
+                <span class="tooltiptext">{block.tooltiptext}</span>
+              )}
+              <h4>{block.blockTitle}</h4>
+              <p class="ticking-number">{block.value}</p>
             </div>
-        </div>
-    }
-    
-</div>
-</div>
-    
-</div>
+          ))
+        }
+      </div>
+      <div class="dd-column right-column">
+        {
+          rightColumnItems.map((block: any, index: any) => (
+            <div class="dashboard-block" onclick={block.link}>
+              {block.tooltiptext && (
+                <span class="tooltiptext">{block.tooltiptext}</span>
+              )}
+              <h4>{block.blockTitle}</h4>
+              <p class="ticking-number">{block.value}</p>
+            </div>
+          ))
+        }
+
+        {
+          imageSrc && (
+            <div class="dashboard-block">
+              <div class="dd-block-img">
+                <img height="220px" src={imageSrc} />
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
 </div>
 <script is:inline>
-            setTimeout(start, 1000);
+  setTimeout(start, 1000);
 
-            function str2number(str){
-                str = str.replace(/,/g, "");
-                var number = str * 1;
-                return number
-            }
+  function str2number(str) {
+    str = str.replace(/,/g, "");
+    var number = str * 1;
+    return number;
+  }
 
-            function start() {
-                setInterval(tickNextElement, Math.random()*2000);
-                }
+  function start() {
+    setInterval(tickNextElement, Math.random() * 2000);
+  }
 
-            function randomDistribution(variance){
-                variance = (variance < 1) ? variance : 0.1;
-                return (Math.random() - variance) * (2/(0.5 - variance))
-            }
+  function randomDistribution(variance) {
+    variance = variance < 1 ? variance : 0.1;
+    return (Math.random() - variance) * (2 / (0.5 - variance));
+  }
 
-            var tickingNumbers = document.getElementsByClassName("ticking-number");
-            var tickingNumIndex = 0;
-            function tick(el){    
-                let n = str2number(el.innerText);
-                growthRate = str2number(el.getAttribute("growth"));
-                if (growthRate){
-                    n += Math.round(growthRate * randomDistribution(0.1) );
-                    el.innerText =  n.toLocaleString();
-                }
-            }
+  var tickingNumbers = document.getElementsByClassName("ticking-number");
+  var tickingNumIndex = 0;
+  function tick(el) {
+    let n = str2number(el.innerText);
+    growthRate = str2number(el.getAttribute("growth"));
+    if (growthRate) {
+      n += Math.round(growthRate * randomDistribution(0.1));
+      el.innerText = n.toLocaleString();
+    }
+  }
 
-            function tickNextElement(){
-                let numTicking = tickingNumbers.length;
-                tick(tickingNumbers[tickingNumIndex % numTicking]);
-                tickingNumIndex++;
-            }
-
-        </script>
+  function tickNextElement() {
+    let numTicking = tickingNumbers.length;
+    tick(tickingNumbers[tickingNumIndex % numTicking]);
+    tickingNumIndex++;
+  }
+</script>
