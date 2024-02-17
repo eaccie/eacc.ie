@@ -1,84 +1,67 @@
+<html lang="en" class="h-screen">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+    <title>é/acc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col h-screen">
+    <nav class="text-center text-lg font-serif text-dark-irish-green p-4 space-y-1 bg-white">
+        <h1 class="text-4xl sm:text-6xl font-semibold">Éire Accelerationism</h1>
+        <h2 class="text-xl sm:text-3xl">Accelerating Ireland toward a better future</h2>
+    </nav>
+    <hr class="border-t border-dark-irish-green" /> <!-- Divider -->
+    <div class="flex flex-1 flex-col sm:flex-col justify-center items-center  p-12 overflow-auto text-center text-sm sm:text-lg">
+				<ul class="flex-1 flex flex-col justify-center items-center list-none space-y-4 sm:space-y-8">
+					<li class="text-green-600 underline">Our Manifesto (coming soon)</li>
+				</ul>
+				<div class="p-4 text-center bg-white ">
+					<p class="text-xl sm:text-3xl font-bold uppercase font-serif text-dark-irish-green mb-4">Join us</p>
 
----
-import Dashboard from '../components/Dashboard.astro';
-
-const housingMetrics = [
-{ blockTitle:"TOTAL HOUSING STOCK IN IRELAND", growth: 1, value: '2,003,645', link:"https://www.cso.ie/en/releasesandpublications/ep/p-cp1hii/cp1hii/hs/" },
-{ blockTitle:"HOUSES BUILT IN 12 MONTHS", growth: 1, value: '32,110', link:"https://www.cso.ie/en/releasesandpublications/ep/p-ndc/newdwellingcompletionsq42022/" },
-{ blockTitle:"AVERAGE RENT IN DUBLIN", growth: 3, value: '2,113', link:"https://www.rtb.ie/images/uploads/forms/RTB_Rent_Index_Q3_2023_infographic_no._2_.pdf" },
-  { blockTitle:"MEDIAN HOUSEHOLD INCOME €", growth: 0, value: '45,537', link:"" },
-  { blockTitle:"HOUSE PRICE GROWTH LAST YEAR", growth: 0, value: '2.3%', link:"https://www.euronews.com/business/2023/12/13/house-prices-continue-to-rise-in-ireland-wheres-best-to-buy#:~:text=Figures%20released%20by%20the%20country%27s,September%20and%201.1%25%20in%20August." }, 
-  { blockTitle:"TAOISEACH DECLARED HOUSING EMERGENCY", growth: 0, value: '29th March 2018', link:"https://www.thejournal.ie/taoiseach-homelessness-3930398-Mar2018/"}, 
-  { blockTitle:"NEW BUILDS BER RATING A OR ABOVE", growth: 0, value: '>99%', link:"https://www.irishtimes.com/business/2023/07/17/dublin-18-has-highest-proportion-of-a-rated-homes-in-country/" }, 
-];
-
----
-
-<html lang="en" class="h-full">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
-		<title>é/acc</title>
-		<style>
-			body {
-				cursor: url('Armadyl_godsword_v1.png'), auto;
-			}
-		</style>
-	</head>
-	<body class="flex flex-col">
-		<nav class="text-center text-lg font-serif text-dark-irish-green p-4 space-y-1">
-			<h1 class="text-4xl sm:text-6xl font-semibold">Éire Accelerationism</h1>
-			<h2 class="text-xl sm:text-3xl">Accelerating Ireland toward a better future</h2>
-		</nav>
-		<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
-		<div class="flex flex-1 flex-col sm:flex-row justify-around items-center p-4 overflow-auto text-center  text-sm sm:text-lg">
-			<ul class="flex-1 flex flex-col justify-center items-center list-none space-y-4 sm:space-y-8">
-					<li class="text-green-600 underline">Manifesto (coming soon)</li>
-					<li class="text-green-600 underline">Blog (coming soon)</li>
-			</ul>
-			<ul class="flex-1 flex flex-col justify-center items-center list-none space-y-4 sm:space-y-8">
-				<li class="text-green-600 underline">Associated Companies (coming soon)</li>
-				<li class="text-green-600 underline">Associated People (coming soon)</li>
-			</ul>
-			<ul class="flex-1 flex flex-col justify-center litems-center list-none space-y-4 sm:space-y-8">
-				<li class="text-green-600 underline">Important Updates (coming soon)</li>
-				<li class="text-green-600 underline">Events (coming soon)</li>
-			</ul>
-	</div>
-		<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
-		<div class="flex justify-center items-center p-4 ">
-			<div class="p-4 text-center bg-white ">
-					<p class="text-xl sm:text-3xl font-bold uppercase font-serif text-dark-irish-green mb-4">Join the resistance</p>
-	
 					<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4 items-center">
 							<input type="hidden" name="access_key" value="2b3ebddd-40be-40aa-8cd6-f86960e8ee60">
-	
+
 							<!-- Styling the email input -->
 							<input type="email" name="email" required placeholder="Your Email" class="px-4 py-2 border rounded-lg text-gray-700 min-w-40 sm:min-w-80">
-	
+
 							<!-- CAPTCHA will auto-center as it is a block element within a flex container -->
 							<div class="h-captcha" data-captcha="true"></div>
-	
+
 							<!-- Styling the submit button -->
-							<button type="submit" class="px-4 py-2 bg-dark-irish-green text-white rounded-lg sm:text-lg sm:px-8 sm:py-4">Submit Form</button>
+							<button type="submit" class="px-4 py-2 bg-dark-irish-green text-white rounded-lg sm:text-lg sm:px-8 sm:py-4">Submit</button>
 					</form>
-	
+
 					<div class="mt-4 transform scale-50">
 							<script src="https://web3forms.com/client/script.js" async defer></script>
 					</div>
+					<script type="module">
+						// JavaScript to toggle CAPTCHA visibility
+						document.addEventListener('DOMContentLoaded', () => {
+								const emailInput = document.querySelector('input[type="email"]');
+								const captcha = document.querySelector('.h-captcha');
+		
+								captcha.style.display = 'none'; // Initially hide CAPTCHA
+		
+								emailInput.addEventListener('input', () => {
+										if(emailInput.value) {
+												captcha.style.display = 'block'; // Show CAPTCHA when user starts typing
+										} else {
+												captcha.style.display = 'none'; // Hide CAPTCHA if input is cleared
+										}
+								});
+						});
+				</script>
 			</div>
-	</div>
 
-	<hr class="border-t border-dark-irish-green" /> <!-- Divider -->
-	
-	<Dashboard blocks={housingMetrics}  dashboardTitle="HOUSING BY THE NUMBERS"/>
-	<hr class="border-t border-dark-irish-green"/> <!-- Divider -->
-	
-	<footer class="p-4">
-		<p class="text-center text-lg font-serif text-dark-irish-green">© 2024 Éire Accelerationism</p>
-	</footer>
-	</body>
+    </div>
+
+    <hr class="border-t border-dark-irish-green" /> <!-- Divider -->
+
+    <footer class="p-4 flex flex-col items-center space-y-4">
+			<img class="w-6 h-6 stroke-dark-irish-green" src="/logo.svg" alt="Logo" class="mb-4" /> <!-- Include your SVG here -->
+      <p class="text-center text-lg font-serif text-dark-irish-green">© 2024 Éire Accelerationism</p>
+    </footer>
+</body>
 </html>
