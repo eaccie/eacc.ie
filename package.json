@@ -8,7 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fmt": "prettier -w src/**/*.astro"
+    "fmt": "prettier --config .prettierrc.mjs -w ."
   },
   "dependencies": {
     "@astrojs/check": "^0.5.4",
