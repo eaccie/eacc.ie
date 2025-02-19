@@ -256,3 +256,12 @@ h2 {
     text-align: right;
     opacity: 0.5;
 }
+
+.form-container .emailoctopus-form-wrapper .emailoctopus-success-message {
+    color: #FFFFFF !important;
+}
+
+.form-container .emailoctopus-form-wrapper .emailoctopus-error-message {
+    color: #FF5555 !important;
+}
+
