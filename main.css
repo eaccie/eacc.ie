@@ -252,6 +252,14 @@ h2 {
     opacity: 0.5;
 }
 
+.form-container .emailoctopus-form-wrapper .emailoctopus-success-message {
+    color: #FFFFFF !important;
+}
+
+.form-container .emailoctopus-form-wrapper .emailoctopus-error-message {
+    color: #FF5555 !important;
+}
+
 .vision-version a {
     text-decoration: none;
     color: inherit;
