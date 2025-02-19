@@ -114,7 +114,8 @@ h2 {
 }
 
 .logo {
-    height: 200px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .content {
@@ -223,12 +224,6 @@ h2 {
     justify-content: center;
 }
 
-/* .emailoctopus-form-wrapper form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-} */
-
 .emailoctopus-form-wrapper .btn {
     background-color: rgba(0, 95, 37, 255) !important;
     color: #ffffff !important;
@@ -265,3 +260,11 @@ h2 {
     color: #FF5555 !important;
 }
 
+.vision-version a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.vision-version a:hover {
+    text-decoration: underline;
+}
